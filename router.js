@@ -9,4 +9,5 @@ module.exports = function(app){
     app.route('/add-mhs').post(jsonku.addMhs);
     app.route('/update-mhs').put(jsonku.updateMhs);
     app.route('/delete-mhs/:id').delete(jsonku.deleteMhs);
+    app.route('/get-mhs-subject').get(jsonku.getJoinMhsAndSubject);
 }

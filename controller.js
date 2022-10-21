@@ -72,3 +72,21 @@ exports.deleteMhs = function(req, res){
         }
     });
 }
+
+exports.getJoinMhsAndSubject = function(req, res) {
+    connection.query(`
+        SELECT mhs.id_mahasiswa, mhs.nim, mhs.nama, mhs.jurusan, mk.matakuliah, mk.sks
+        FROM krs
+        JOIN matakuliah mk
+        JOIN mahasiswa mhs
+        WHERE krs.id_matakuliah = mk.id_matakuliah AND krs.id_mahasiswa = mhs.id_mahasiswa
+        ORDER BY mhs.id_mahasiswa`,
+        function(error, rows, fields){
+            if(error){
+                console.error(error)
+            }else{
+                response.oknested(rows, res)
+            }
+        }
+    );
+}
